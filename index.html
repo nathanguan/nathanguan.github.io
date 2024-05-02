@@ -111,14 +111,14 @@
             randomRoll > 2 ? (account_id = oldAccounts[Math.floor(Math.random() * accounts.length)],
             accString = account_id.replace(/\s/g, ""),
             getVisitorId(accString)) : getDateBasedVisitorId(),
-            account_id = urlAccount || account_id,
-            visitor = `${urlVisitor || visitor.slice(0, visitor.indexOf("@"))}@${account_id.replace(/\s/g, "")}.com`,
-            role = urlRole || role,
+            account_id = "email"//urlAccount || account_id,
+            visitor = "pls_work@email.com"//`${urlVisitor || visitor.slice(0, visitor.indexOf("@"))}@${account_id.replace(/\s/g, "")}.com`,
+            role = "user"//urlRole || role,
             window.userInfo = {
-                account: "Pls Work Inc"//account_id,
-                visitor: "pls"//visitor.slice(0, visitor.indexOf("@")),
-                visitorId: "pls_work"//visitor,
-                role: "user"//role
+                account: account_id,
+                visitor: visitor.slice(0, visitor.indexOf("@")),
+                visitorId: visitor,
+                role: role
             },
             disablePendo || (!function(r, e, a, i, o) {
                 var t, n, s, c, l;
