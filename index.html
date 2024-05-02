@@ -81,7 +81,7 @@
                 return role = roles[visitors.indexOf(i) % roles.length],
                 account_id = accounts[visitors.indexOf(i) % accounts.length],
                 accString = account_id.replace(/\s/g, ""),
-                visitor = `pls_work@email.com`,
+                visitor = `${visitor}${accString}.com`,
                 visitor
             }
             function getVisitorId(r) {
@@ -115,10 +115,10 @@
             visitor = `${urlVisitor || visitor.slice(0, visitor.indexOf("@"))}@${account_id.replace(/\s/g, "")}.com`,
             role = urlRole || role,
             window.userInfo = {
-                account: account_id,
-                visitor: visitor.slice(0, visitor.indexOf("@")),
-                visitorId: visitor,
-                role: role
+                account: "Pls Work Inc"//account_id,
+                visitor: "pls"//visitor.slice(0, visitor.indexOf("@")),
+                visitorId: "pls_work"//visitor,
+                role: "user"//role
             },
             disablePendo || (!function(r, e, a, i, o) {
                 var t, n, s, c, l;
@@ -136,11 +136,11 @@
             }(window, document, "script", "pendo"),
             pendo.initialize({
                 visitor: {
-                    id: "pls_work@email.com",
-                    role: "user"
+                    id: "pls_work@email.com", //visitor || "VISITOR-UNIQUE-ID"
+                    role: "user" //role || "user"
                 },
                 account: {
-                    id: "Pls Work Inc"
+                    id: "Pls Work Inc" //account || "ACCOUNT-UNIQUE-ID"
                 }
             }))
         </script>
