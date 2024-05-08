@@ -136,11 +136,11 @@
             }(window, document, "script", "pendo"),
             pendo.initialize({
                 visitor: {
-                    id: "pls_work@email.com", //visitor || "VISITOR-UNIQUE-ID"
-                    role: "user" //role || "user"
+                    id: visitor || "VISITOR-UNIQUE-ID"//"pls_work@email.com", //visitor || "VISITOR-UNIQUE-ID"
+                    role: role || "user"//"user" //role || "user"
                 },
                 account: {
-                    id: "Pls Work Inc" //account || "ACCOUNT-UNIQUE-ID"
+                    id: account || "ACCOUNT-UNIQUE-ID"//"Pls Work Inc" //account || "ACCOUNT-UNIQUE-ID"
                 }
             }))
         </script>
