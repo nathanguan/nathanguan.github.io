@@ -111,9 +111,9 @@
             randomRoll > 2 ? (account_id = oldAccounts[Math.floor(Math.random() * accounts.length)],
             accString = account_id.replace(/\s/g, ""),
             getVisitorId(accString)) : getDateBasedVisitorId(),
-            account_id = urlAccount || account_id,//"Pls Work Inc"//urlAccount || account_id,
+            account_id = urlAccount || account_id, //"Pls Work Inc", //urlAccount || account_id,
             visitor = `${urlVisitor || visitor.slice(0, visitor.indexOf("@"))}@${account_id.replace(/\s/g, "")}.com`,//"pls_work@email.com"//`${urlVisitor || visitor.slice(0, visitor.indexOf("@"))}@${account_id.replace(/\s/g, "")}.com`,
-            role = urlRole || role,//"user"//urlRole || role,
+            role = urlRole || role, //"user"//urlRole || role,
             window.userInfo = {
                 account: account_id,
                 visitor: visitor.slice(0, visitor.indexOf("@")),
@@ -136,11 +136,11 @@
             }(window, document, "script", "pendo"),
             pendo.initialize({
                 visitor: {
-                    id: visitor || "VISITOR-UNIQUE-ID",//"pls_work@email.com", //visitor || "VISITOR-UNIQUE-ID",
-                    role: role || "user"//"user" //role || "user"
+                    id: visitor || "VISITOR-UNIQUE-ID", //"pls_work@email.com", //visitor || "VISITOR-UNIQUE-ID",
+                    role: role || "user" //"user" //role || "user"
                 },
                 account: {
-                    id: account || "ACCOUNT-UNIQUE-ID"//"Pls Work Inc" //account || "ACCOUNT-UNIQUE-ID"
+                    id: account_id || "ACCOUNT-UNIQUE-ID" //"Pls Work Inc" //account || "ACCOUNT-UNIQUE-ID"
                 }
             }))
         </script>
