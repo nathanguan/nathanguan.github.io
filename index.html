@@ -116,8 +116,8 @@
             role = "user",//urlRole || role,
             window.userInfo = {
                 account: account_id,
-                visitor: visitor.slice(0, visitor.indexOf("@")),
-                visitorId: visitor,
+                //visitor: visitor.slice(0, visitor.indexOf("@")),
+                //visitorId: visitor,
                 role: role
             },
             disablePendo || (!function(r, e, a, i, o) {
@@ -136,7 +136,7 @@
             }(window, document, "script", "pendo"),
             pendo.initialize({
                 visitor: {
-                    id:  "pls_work@email.com",//visitor || "VISITOR-UNIQUE-ID", //"pls_work@email.com",//
+                    id:  visitor,// || "VISITOR-UNIQUE-ID", //"pls_work@email.com",//
                     role: ,//role || "user", // "user",//
                     number_overwrite: 1,
                     url: "app.pendo.io"
