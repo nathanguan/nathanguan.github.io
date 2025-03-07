@@ -112,7 +112,7 @@
             randomRoll > 2 ? (account_id = oldAccounts[Math.floor(Math.random() * accounts.length)],
             accString = account_id.replace(/\s/g, ""),
             getVisitorId(accString)) : getDateBasedVisitorId(),
-            //account_id = "Pls Work Inc", //urlAccount || account_id,
+            account_id = urlAccount || account_id,//"Pls Work Inc", //urlAccount || account_id,
             visitor = `${urlVisitor || visitor.slice(0, visitor.indexOf("@"))}@${account_id.replace(/\s/g, "")}.com`,
             role = "user",//urlRole || role,
             window.userInfo = {
@@ -138,7 +138,7 @@
             pendo.initialize({
                 visitor: {
                     id:  visitor_id || "VISITOR-UNIQUE-ID",//visitorIdFailToLoadTestScenario,// visitor_id || "VISITOR-UNIQUE-ID", ////
-                    role:  "admin",//,//,//role || "user", // "user",//
+                    role:  role || "user",///"admin",//,//,//role || "user", // "user",//
                     new: null,
                     text_as_int: 2
                     //number_overwrite: 1,
