@@ -137,7 +137,7 @@
             }(window, document, "script", "pendo"),
             pendo.initialize({
                 visitor: {
-                    id:  visitorId || "VISITOR-UNIQUE-ID",//visitorIdFailToLoadTestScenario,// visitor_id || "VISITOR-UNIQUE-ID", ////
+                    id:  visitor || "VISITOR-UNIQUE-ID",//visitorIdFailToLoadTestScenario,// visitor_id || "VISITOR-UNIQUE-ID", ////
                     role:  role || "user",///"admin",//,//,//role || "user", // "user",//
                     new: null,
                     text_as_int: 2
@@ -145,7 +145,7 @@
                     //url: "app.pendo.io"
                 },
                 account: {
-                    id: account || "ACCOUNT-UNIQUE-ID"//"Pls Work Inc",//account_id || "ACCOUNT-UNIQUE-ID", //"Pls Work Inc",//
+                    id: account_id || "ACCOUNT-UNIQUE-ID"//"Pls Work Inc",//account_id || "ACCOUNT-UNIQUE-ID", //"Pls Work Inc",//
                     //acc_number_overwrite: null                   
                 }
             }))
