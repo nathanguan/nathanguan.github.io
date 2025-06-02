@@ -159,7 +159,10 @@
           analytics.load("5Kn6ajGKI48DNQK8OGHcQLy3AQ9McXOY");
           analytics.page();
           }}()
-
+            analytics.identify('nathan.guan@pendo.io', {
+              name: 'i have no idea what im doing',
+              email: 'test@example.com'
+            });
         </script> 
         <title>pizzaCRM</title>
         <link href="/static/css/2.fed9dcda.chunk.css" rel="stylesheet">
@@ -170,7 +173,11 @@
         <div id="exit-intent"></div>
         <div id="root"></div>
         <script>//segment
-            analytics.identify('nathan.guan@pendo.io', {
+            // analytics.identify('nathan.guan@pendo.io', {
+            //   name: 'i have no idea what im doing',
+            //   email: 'test@example.com'
+            // });
+            analytics.track('Always tracking', {
               name: 'i have no idea what im doing',
               email: 'test@example.com'
             });
