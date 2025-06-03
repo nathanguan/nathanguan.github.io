@@ -137,15 +137,15 @@
             }(window, document, "script", "pendo"),
             pendo.initialize({
                 visitor: {
-                    id:  "nathan.guan@pendo.io",//"01u834WBrovLoW/1K7VIt+SUQGQ=",//"pls_work@email.com",//visitor || "VISITOR-UNIQUE-ID",//visitorIdFailToLoadTestScenario,// visitor_id || "VISITOR-UNIQUE-ID", ////
-                    role:  "test_user",//role || "user",///"admin",//,//,//role || "user", // "user",//
+                    id:  "nathan.guan+track_event@pendo.io",//"01u834WBrovLoW/1K7VIt+SUQGQ=",//"pls_work@email.com",//visitor || "VISITOR-UNIQUE-ID",//visitorIdFailToLoadTestScenario,// visitor_id || "VISITOR-UNIQUE-ID", ////
+                    role:  "test_admin",//role || "user",///"admin",//,//,//role || "user", // "user",//
                     new: null,
                     text_as_int: 2
                     //number_overwrite: 1,
                     //url: "app.pendo.io"
                 },
                 account: {
-                    id: "test"//"Pls Work Inc"//account_id || "ACCOUNT-UNIQUE-ID"//"Pls Work Inc",//account_id || "ACCOUNT-UNIQUE-ID", //"Pls Work Inc",//
+                    id: "track_event_test"//"Pls Work Inc"//account_id || "ACCOUNT-UNIQUE-ID"//"Pls Work Inc",//account_id || "ACCOUNT-UNIQUE-ID", //"Pls Work Inc",//
                     //acc_number_overwrite: null                   
                 },
                 guides:
@@ -159,10 +159,10 @@
           analytics.load("5Kn6ajGKI48DNQK8OGHcQLy3AQ9McXOY");
           analytics.page();
           }}()
-            analytics.identify('nathan.guan@pendo.io', {
-              name: 'i have no idea what im doing',
-              email: 'test@example.com'
-            });
+            // analytics.identify('nathan.guan@pendo.io', {
+            //   name: 'i have no idea what im doing',
+            //   email: 'test@example.com'
+            // });
         </script> 
         <title>pizzaCRM</title>
         <link href="/static/css/2.fed9dcda.chunk.css" rel="stylesheet">
@@ -177,10 +177,10 @@
             //   name: 'i have no idea what im doing',
             //   email: 'test@example.com'
             // });
-            analytics.track('Always tracking with no metadata mapped', {
-              name: 'i have no idea what im doing',
+            analytics.track('Always tracking with no metadata mapped and no identify call made', {
+              name: 'noname',
               email: 'test@example.com',
-                groupId: 'pendo-internal'
+              groupId: 'pendo-internal'
             });
         </script> 
         <script>
