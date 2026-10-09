@@ -1,5 +1,6 @@
 // Pulls in a premade Axios object for making simple calls to RestDB
 import { RestDBAxios } from '../index.js';
+import { trackRecordDataLoadFailed } from '../utils/pendo.js';
 
 export const seeAccountDetails = (id) => ({
     type: 'SEE_ACCOUNT_DETAILS',
@@ -31,13 +32,16 @@ export const receivedAccountsData = (json) => ({
 });
 
 export const fetchAccounts = () => {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(requestAccountsData());
         // Axios object created from the index.js
         RestDBAxios.get('accounts')
             .then((response) => {
                 dispatch(receivedAccountsData(response.data));
             })
-            .catch(err => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                trackRecordDataLoadFailed(err, 'accounts');
+            });
     };
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Tabs, Input, Button, Timeline, Icon } from 'antd';
+import { trackPendoEvent } from '../../utils/pendo';
 
 import './details.scss';
 
@@ -192,10 +193,22 @@ export default class Details extends React.Component {
                   let activeTabHTML = document.getElementsByClassName(
                     'ant-tabs-tab-active'
                   )[0].innerHTML;
+                  // Read before submitting: the timeline reducer clears inputValue
+                  const entryLength = this.props.inputValue.length;
                   this.props.onDetailsSubmit(
                     activeTabHTML,
                     this.props.inputValue
                   );
+
+                  // Pendo: entry posted to this record's activity timeline. Only
+                  // the entry's length is sent, never the note text.
+                  trackPendoEvent('Timeline Activity Logged', {
+                    activity_type: activeTabHTML,
+                    record_type: fieldIdentifier,
+                    record_id: document.location.pathname.split('/')[2],
+                    is_new_record: localStorageCheck,
+                    entry_length: entryLength,
+                  });
                 }}
               >
                 Submit
