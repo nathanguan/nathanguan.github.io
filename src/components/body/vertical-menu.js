@@ -12,6 +12,7 @@ import {
 } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { requestOpportunitiesData } from '../../actions/opportunitiesActions';
+import { trackPendoEvent } from '../../utils/pendo';
 
 import './vertical-menu.scss';
 
@@ -81,10 +82,12 @@ class Body extends React.Component {
     // visible -> whether the modal should show or not (from "Add New")
     // OKLoading -> created a loading effect for the clicking ok on the modal
     // addNewFormData -> this is the information that gets updated, and eventualyl sent with Add New
+    // defaultRecordType -> the type pre-selected from the current page when the modal opens (for Pendo)
     this.state = {
       title: props.title,
       visible: false,
       loading: false,
+      defaultRecordType: 'Accounts',
       addNewFormData: {
         value: 'Accounts',
         fieldOne: '',
@@ -112,6 +115,7 @@ class Body extends React.Component {
 
     this.setState({
       addNewFormData,
+      defaultRecordType: addNewFormData['value'],
     });
 
     this.setState({
@@ -127,6 +131,10 @@ class Body extends React.Component {
   }
 
   _handleOk(e) {
+    // Another OK click while the first is still pending schedules a second
+    // timeout; only the first one should count as a created record
+    const isRepeatSubmit = this.state.loading;
+
     this.setState({ loading: true });
     setTimeout(() => {
       this.setState({
@@ -141,6 +149,10 @@ class Body extends React.Component {
       );
       localStorage.setItem('loading', false);
 
+      if (!isRepeatSubmit) {
+        this._trackRecordCreated();
+      }
+
       this.props.history.push({
         pathname: this.state.addNewFormData.value + '/new/details',
         state: {
@@ -148,6 +160,31 @@ class Body extends React.Component {
         },
       });
     }, 1000);
+  }
+
+  // Pendo: record created from the "Create New" modal. Only the type, how many
+  // fields were filled in and the ARR are sent, never names, emails or phones.
+  _trackRecordCreated() {
+    const { value, fieldOne, fieldTwo, fieldThree } = this.state.addNewFormData;
+    const properties = {
+      record_type: value,
+      source_page: this.props.title,
+      record_type_changed: value !== this.state.defaultRecordType,
+      fields_completed: [fieldOne, fieldTwo, fieldThree].filter(
+        (field) => field.trim() !== ''
+      ).length,
+    };
+
+    const arr = Number(fieldThree);
+    if (
+      value === 'Opportunities' &&
+      fieldThree.trim() !== '' &&
+      Number.isFinite(arr)
+    ) {
+      properties.arr = arr;
+    }
+
+    trackPendoEvent('Record Created', properties);
   }
 
   // Change <select> <option> value and set State
@@ -169,6 +206,18 @@ class Body extends React.Component {
     });
   }
 
+  // Global search: fires on Enter and on the search button
+  _onSearch(value) {
+    console.log(value);
+
+    // Pendo: search submitted. The query itself isn't sent since CRM searches
+    // can contain contact names or emails; query_length 0 = blank search.
+    trackPendoEvent('Search Submitted', {
+      query_length: value.length,
+      page_title: this.props.title,
+    });
+  }
+
   render() {
     const { title, visible, loading } = this.state;
     return (
@@ -182,7 +231,7 @@ class Body extends React.Component {
               name="search"
               placeholder="Search"
               enterButton
-              onSearch={(value) => console.log(value)}
+              onSearch={(value) => this._onSearch(value)}
             />
           </div>
           <div className="vertical-menu-item right avatar-container">

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Button } from 'antd';
+import { trackPendoEvent } from '../../utils/pendo';
 
 import './mobile.scss';
 
@@ -117,6 +118,18 @@ export default class Mobile extends React.Component {
 
     appetizeContainer.appendChild(iframe);
     settingsContainer.style.display = 'none';
+
+    // Pendo: Appetize session embedded. device/os_version are read back from
+    // the embed URL; the has_* flags show whether real visitor/account IDs
+    // were passed to the mobile session.
+    const embedParams = new URL(iframe.src).searchParams;
+    trackPendoEvent('Mobile Demo Launched', {
+      scale,
+      device: embedParams.get('device'),
+      os_version: embedParams.get('osVersion'),
+      has_visitor_id: Boolean(this.props?.visInfo?.visitor?.id),
+      has_account_id: Boolean(this.props?.visInfo?.account?.id),
+    });
   }
 
   render() {

@@ -1,4 +1,5 @@
 import { RestDBAxios } from '../index';
+import { trackRecordDataLoadFailed } from '../utils/pendo';
 
 // As the text gets inputted into the textarea this updates the text object when it needs to be submitted
 export const updateDetailsInputValue = (text) => ({
@@ -49,7 +50,7 @@ export const receivedAsyncDetailsData = (json) => ({
 });
 
 export const fetchDetails = (url) => {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(requestDetailsData());
 
         // What's happening here is that I am taking the whatever the current URL is and splitting it up by "/"
@@ -61,9 +62,12 @@ export const fetchDetails = (url) => {
         // Example continued:
         // RestDBAxios.get('contacts/8402502-0385-2039-40')
         RestDBAxios.get(urlSplit[1] + '/' + urlSplit[2])
-            .then(response => {
+            .then((response) => {
                 dispatch(receivedAsyncDetailsData(response.data));
             })
-            .catch(err => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                trackRecordDataLoadFailed(err, urlSplit[1], urlSplit[2]);
+            });
     };
 };

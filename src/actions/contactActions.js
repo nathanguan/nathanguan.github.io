@@ -1,4 +1,5 @@
 import { RestDBAxios } from '../index.js';
+import { trackRecordDataLoadFailed } from '../utils/pendo.js';
 
 /*
  * Account, Contacts, Opportunities will all follow the same structure
@@ -25,13 +26,16 @@ export const receivedContactsData = (json) => ({
 });
 
 export const fetchContacts = () => {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(requestContactsData());
 
         RestDBAxios.get('contacts')
             .then((response) => {
                 dispatch(receivedContactsData(response.data));
             })
-            .catch(err => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                trackRecordDataLoadFailed(err, 'contacts');
+            });
     };
 };
