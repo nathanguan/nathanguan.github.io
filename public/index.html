@@ -497,7 +497,14 @@
             var v, w, x, y, z;
             o = p[d] = p[d] || {};
             o._q = [];
-            v = ['initialize', 'identify', 'updateOptions', 'pageLoad'];
+            v = [
+              'initialize',
+              'identify',
+              'updateOptions',
+              'pageLoad',
+              'track',
+              'trackAgent',
+            ];
             for (w = 0, x = v.length; w < x; ++w)
               (function (m) {
                 o[m] =
@@ -524,7 +531,7 @@
               id: account_id || 'ACCOUNT-UNIQUE-ID',
             },
           });
-        })('YOUR-PENDO-API-KEY-HERE');
+        })('09bc0feb-48a9-4452-b56b-08b136cf743d');
       }
     </script>
     <title>pizzaCRM</title>
